@@ -6,26 +6,26 @@ using System.Linq;
 
 namespace RestWithASPNETUdemy.Repository.Implementations
 {
-    public class PersonRepositoryImplementation : IPersonRepository
+    public class BookRepositoryImplementation : IBookRepository
     {
         private MySQLContext _context;
 
-        public PersonRepositoryImplementation(MySQLContext context) 
+        public BookRepositoryImplementation(MySQLContext context) 
         {
             _context = context;
         }
 
-        public List<Person> FindAll()
+        public List<Book> FindAll()
         {
-            return _context.Persons.ToList();
+            return _context.Books.ToList();
         }
 
-        public Person FindById(long id)
+        public Book FindById(long id)
         {
-            return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
+            return _context.Books.SingleOrDefault(p => p.Id.Equals(id));
         }
 
-        public Person Create(Person person)
+        public Book Create(Book person)
         {
             try
             {
@@ -40,12 +40,12 @@ namespace RestWithASPNETUdemy.Repository.Implementations
             return person;
         }
 
-        public Person Update(Person person)
+        public Book Update(Book person)
         {
             if (!Exists(person.Id))
                 return null;
 
-            Person result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
+            Book result = _context.Books.SingleOrDefault(p => p.Id.Equals(person.Id));
             if (result != null)
             {
                 try
@@ -64,12 +64,12 @@ namespace RestWithASPNETUdemy.Repository.Implementations
 
         public void Delete(long id)
         {
-            Person result = _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
+            Book result = _context.Books.SingleOrDefault(p => p.Id.Equals(id));
             if (result != null)
             {
                 try
                 {
-                    _context.Persons.Remove(result);
+                    _context.Books.Remove(result);
                     _context.SaveChanges();
                 }
                 catch (Exception)
@@ -81,7 +81,7 @@ namespace RestWithASPNETUdemy.Repository.Implementations
 
         public bool Exists(long id)
         {
-            return _context.Persons.Any(p => p.Id.Equals(id));
+            return _context.Books.Any(p => p.Id.Equals(id));
         }
     }
 }

@@ -1,0 +1,16 @@
+INSERT INTO `books` (`id`, `author`, `launch_date`, `price`, `title`) VALUES 
+	(1, 'George Orwell', '1949-06-08 09:00:00', 14.99, '1984'),
+    (2, 'J.R.R. Tolkien', '1954-07-29 14:30:00', 19.99, 'The Lord of the Rings'),
+    (3, 'Harper Lee', '1960-07-11 18:45:00', 12.99, 'To Kill a Mockingbird'),
+    (4, 'Jane Austen', '1813-01-28 12:15:00', 9.99, 'Pride and Prejudice'),
+    (5, 'F. Scott Fitzgerald', '1925-04-10 10:30:00', 11.99, 'The Great Gatsby'),
+    (6, 'Markus Zusak', '2005-03-14 16:20:00', 16.99, 'The Book Thief'),
+    (7, 'Ernest Hemingway', '1926-10-21 13:45:00', 13.99, 'The Sun Also Rises'),
+    (8, 'Gabriel García Márquez', '1967-06-05 19:10:00', 18.99, 'One Hundred Years of Solitude'),
+    (9, 'Leo Tolstoy', '1869-01-20 11:00:00', 21.99, 'War and Peace'),
+    (10, 'J.K. Rowling', '1997-06-26 15:20:00', 15.99, 'Harry Potter and the Philosopher''s Stone'),
+    (11, 'Virginia Woolf', '1927-10-10 08:45:00', 10.99, 'To the Lighthouse'),
+    (12, 'Charles Dickens', '1861-07-01 17:30:00', 14.99, 'Great Expectations'),
+    (13, 'Gillian Flynn', '2012-06-05 10:10:00', 12.99, 'Gone Girl'),
+    (14, 'Albert Camus', '1942-06-16 11:50:00', 9.99, 'The Stranger'),
+    (15, 'Khaled Hosseini', '2003-03-04 13:15:00', 16.99, 'The Kite Runner');

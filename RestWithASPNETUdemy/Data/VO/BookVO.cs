@@ -2,21 +2,18 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RestWithASPNETUdemy.Model
+namespace RestWithASPNETUdemy.Data.VO
 {
-    [Table("books")]
-    public class Book : BaseEntity
+    public class BookVO
     {
-        [Column("price")]
+        public long Id { get; set; }
+
         public decimal Price { get; set; }
 
-        [Column("title")]
         public string Title { get; set; }
 
-        [Column("author")]
         public string Author { get; set; }
 
-        [Column("launch_date")]
         public DateTime LaunchDate { get; set; }
     }
 }

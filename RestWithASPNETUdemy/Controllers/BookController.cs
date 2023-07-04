@@ -3,30 +3,33 @@ using Microsoft.Extensions.Logging;
 using RestWithASPNETUdemy.Model;
 using RestWithASPNETUdemy.Business;
 using RestWithASPNETUdemy.Data.VO;
+using RestWithASPNETUdemy.Hypermedia.Filters;
 
 namespace RestWithASPNETUdemy.Controllers
 {
-    [ApiController]
     [ApiVersion("1")]
+    [ApiController]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class BookController : ControllerBase
     {
         private readonly ILogger<BookController> _logger;
         private IBookBusiness _bookBusiness;
 
-        public BookController(ILogger<BookController> logger, IBookBusiness personBusiness)
+        public BookController(ILogger<BookController> logger, IBookBusiness bookBusiness)
         {
             _logger = logger;
-            _bookBusiness = personBusiness;
+            _bookBusiness = bookBusiness;
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_bookBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
             BookVO book = _bookBusiness.FindById(id);
@@ -37,6 +40,7 @@ namespace RestWithASPNETUdemy.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] BookVO book)
         {
             if (book == null)
@@ -46,6 +50,7 @@ namespace RestWithASPNETUdemy.Controllers
         }
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] BookVO book)
         {
             if (book == null)

@@ -15,6 +15,8 @@ using RestWithASPNETUdemy.Repository.Generic;
 using Microsoft.Net.Http.Headers;
 using RestWithASPNETUdemy.Hypermedia.Filters;
 using RestWithASPNETUdemy.Hypermedia.Enricher;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace RestWithASPNETUdemy
 {
@@ -64,6 +66,22 @@ namespace RestWithASPNETUdemy
 
             services.AddApiVersioning();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
+                        Title = "Rest Api's with ASP .NET Core 5 ande Docker",
+                        Version = "v1",
+                        Description = "API RESTful developed in course 'Rest Api's with ASP .NET Core 5 ande Docker'",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Axel Georg",
+                            Url = new Uri("https://github.com/AxelGeorg")
+                        }
+                    });
+            });
+
             //Dependency Injection
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
@@ -82,6 +100,16 @@ namespace RestWithASPNETUdemy
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Rest Api's with ASP .NET Core 5 ande Docker - v1");
+            });
+
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+            app.UseRewriter(option);
 
             app.UseAuthorization();
 

@@ -1,5 +1,4 @@
-﻿using RestWithASPNETUdemy.Model;
-using RestWithASPNETUdemy.Model.Base;
+﻿using RestWithASPNETUdemy.Model.Base;
 using System.Collections.Generic;
 
 namespace RestWithASPNETUdemy.Repository
@@ -12,5 +11,8 @@ namespace RestWithASPNETUdemy.Repository
         T Update(T item);
         void Delete(long id);
         bool Exists(long id);
+
+        List<T> FindWithPagedSearch(string query);
+        int GetCount(string query);
     }
 }

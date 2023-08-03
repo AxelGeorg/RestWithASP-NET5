@@ -34,6 +34,17 @@ namespace RestWithASPNETUdemy.Controllers
             return Ok(_personBusiness.FindAll());
         }
 
+        [HttpGet("{sortDirection}/{pagedSize}/{page}")]
+        [ProducesResponseType((200), Type = typeof(List<PersonVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Get([FromQuery] string name, string sortDirection, int pagedSize, int page)
+        {
+            return Ok(_personBusiness.FindWithPagedSearch(name, sortDirection, pagedSize, page));
+        }
+
         [HttpGet("{id}")]
         [ProducesResponseType((200), Type = typeof(PersonVO))]
         [ProducesResponseType(204)]
@@ -47,6 +58,21 @@ namespace RestWithASPNETUdemy.Controllers
                 return NotFound();
 
             return Ok(person);
+        }
+
+        [HttpGet("findPersonByName")]
+        [ProducesResponseType((200), Type = typeof(List<PersonVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Get([FromQuery] string firstName, [FromQuery] string lastName)
+        {
+            List<PersonVO> personVOs = _personBusiness.FindByName(firstName, lastName);
+            if (personVOs == null)
+                return NotFound();
+
+            return Ok(personVOs);
         }
 
         [HttpPost]

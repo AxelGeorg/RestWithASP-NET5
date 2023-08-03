@@ -4,6 +4,7 @@ using RestWithASPNETUdemy.Model.Base;
 using RestWithASPNETUdemy.Model.Context;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 
 namespace RestWithASPNETUdemy.Repository.Generic
@@ -87,6 +88,28 @@ namespace RestWithASPNETUdemy.Repository.Generic
         public bool Exists(long id)
         {
             return _dabaSet.Any(p => p.Id.Equals(id));
+        }
+
+        public List<T> FindWithPagedSearch(string query)
+        {
+            return _dabaSet.FromSqlRaw<T>(query).ToList();
+        }
+
+        public int GetCount(string query)
+        {
+            string result = "";
+            using (DbConnection connection = _context.Database.GetDbConnection())
+            {
+                connection.Open();
+
+                using (DbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = query;
+                    result = command.ExecuteScalar().ToString();
+                }
+            }
+
+            return int.Parse(result);
         }
     }
 }
